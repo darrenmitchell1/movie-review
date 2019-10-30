@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="col-md-7">
+        <div>
             <h4 class="text-center font-weight-bold">Movies</h4>
             <table class="table table-striped">
                 <thead>
@@ -26,7 +26,7 @@
         name: "movies",
         computed: {
             movies () {
-                return this.$store.state.movies;
+                return this.$store.state.movies; 
             },
         },
         mounted () {

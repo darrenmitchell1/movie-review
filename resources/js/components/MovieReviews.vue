@@ -23,7 +23,7 @@
     export default {
         name: "movie-reviews",
         props: {
-            movieId: null,
+            movieId: Number,
         },
         computed: {
             reviews () {
@@ -31,7 +31,7 @@
             },
         },
         mounted () {
-            this.$store.dispatch('getReviews', {'movie_id': this.movieId})
+            this.$store.dispatch('getReviews', {'movie_id': this.movieId});
         },
     }
 </script>

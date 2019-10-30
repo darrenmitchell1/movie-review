@@ -12,7 +12,8 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
               integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="{{mix('css/app.css')}}"> -->
+
+        <link rel="stylesheet" href="{{mix('css/app.css')}}">
 
         <!-- Styles -->
         <style>
@@ -74,7 +75,7 @@
         <div id="app">
             <div class="container">
                 <div class="row">
-                    <div>
+                    <div class="col-md-12">
                         <router-view></router-view>
                     </div>
                 </div>

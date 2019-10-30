@@ -1867,6 +1867,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "movie-review-create",
   data: function data() {
@@ -1879,7 +1887,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    movieId: 0
+    movieId: Number
+  },
+  computed: {
+    message: function message() {
+      return this.$store.state.message;
+    },
+    errors: function errors() {
+      return this.$store.state.errors;
+    }
   },
   methods: {
     addReview: function addReview(review) {
@@ -1923,7 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "movie-reviews",
   props: {
-    movieId: null
+    movieId: Number
   },
   computed: {
     reviews: function reviews() {
@@ -37292,105 +37308,132 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "col-md-5" }, [
-      _c(
-        "p",
-        [
-          _c("router-link", { attrs: { to: { name: "Movies" } } }, [
-            _vm._v("Movie List")
-          ])
-        ],
-        1
-      ),
+    _c("p"),
+    _c(
+      "h4",
+      [
+        _c("router-link", { attrs: { to: { name: "Movies" } } }, [
+          _vm._v("Show Movie List")
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("p"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-5" }, [
+        _c("h4", { staticClass: "text-center font-weight-bold" }, [
+          _vm._v("Review Form")
+        ]),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: { action: "" },
+            on: {
+              submit: function($event) {
+                return _vm.addReview(_vm.review)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.review.title,
+                    expression: "review.title"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Review Title" },
+                domProps: { value: _vm.review.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.review, "title", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.title
+                ? _c(
+                    "div",
+                    { staticClass: "alert alert-danger" },
+                    _vm._l(_vm.errors.title.values(), function(err) {
+                      return _c("div", [_vm._v(" " + _vm._s(err) + " ")])
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.review.review,
+                    expression: "review.review"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Review Text" },
+                domProps: { value: _vm.review.review },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.review, "review", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.review
+                ? _c(
+                    "div",
+                    { staticClass: "alert alert-danger" },
+                    _vm._l(_vm.errors.review.values(), function(err) {
+                      return _c("div", [_vm._v(" " + _vm._s(err) + " ")])
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-block btn-primary",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.addReview(_vm.review)
+                    }
+                  }
+                },
+                [_vm._v("Submit Review\n                    ")]
+              )
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c(
-        "form",
-        {
-          attrs: { action: "" },
-          on: {
-            submit: function($event) {
-              return _vm.addReview(_vm.review)
-            }
-          }
-        },
-        [
-          _c("h4", { staticClass: "text-center font-weight-bold" }, [
-            _vm._v("Review creation form")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.review.title,
-                  expression: "review.title"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Title" },
-              domProps: { value: _vm.review.title },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.review, "title", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.review.review,
-                  expression: "review.review"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { placeholder: "Review" },
-              domProps: { value: _vm.review.review },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.review, "review", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-block btn-primary",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.addReview(_vm.review)
-                  }
-                }
-              },
-              [_vm._v("Submit\n                ")]
-            )
-          ])
-        ]
+        "div",
+        { staticClass: "col-md-7" },
+        [_c("movie-reviews", { attrs: { movieId: _vm.review.movie_id } })],
+        1
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-md-7" },
-      [_c("movie-reviews", { attrs: { movieId: "this.movieId" } })],
-      1
-    )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -37473,7 +37516,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "col-md-7" }, [
+    _c("div", [
       _c("h4", { staticClass: "text-center font-weight-bold" }, [
         _vm._v("Movies")
       ]),
@@ -53650,7 +53693,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -53672,7 +53715,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = process.env.MIX_APP_URL;
+window.axios.defaults.baseURL = "http://www.movie-review.com";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -53686,7 +53729,6 @@ window.axios.defaults.baseURL = process.env.MIX_APP_URL;
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -53974,11 +54016,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     storeReview: function storeReview(state, review) {
       state.reviews.unshift(review);
     },
-    clearMessage: function clearMessage(state) {
-      state.errors = [];
-    },
     clearErrors: function clearErrors(state) {
-      state.errors = [];
+      state.message = '';
+      state.errors = '';
     },
     addError: function addError(state, error) {
       state.message = error.message;
@@ -53987,12 +54027,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   actions: {
     addReview: function addReview(context, review) {
-      context.commit('clearMessage');
       context.commit('clearErrors');
       axios.post('/api/movies/reviews/store', review).then(function (res) {
         context.commit('storeReview', res.data);
       })["catch"](function (err) {
-        context.commit('addError', err);
+        context.commit('addError', err.response.data);
       });
     },
     getMovies: function getMovies(context) {
@@ -54001,13 +54040,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       });
     },
     getReviews: function getReviews(context, movie) {
-      context.commit('clearMessage');
       context.commit('clearErrors');
-      console.log(movie);
-      axios.get('/api/movies/2/reviews').then(function (res) {
+      axios.get('/api/movies/' + movie.movie_id + '/reviews').then(function (res) {
         context.commit('storeReviews', res.data);
       })["catch"](function (err) {
-        context.commit('addError', err);
+        context.commit('addError', err.response.data);
       });
     }
   }

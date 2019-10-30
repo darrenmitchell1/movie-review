@@ -20,32 +20,25 @@ export default new Vuex.Store({
     storeReview (state, review) {
       state.reviews.unshift(review)
     },
-    clearMessage (state) {
-      state.errors = [];
-    },
     clearErrors (state) {
-      state.errors = [];
+      state.message = '';
+      state.errors = '';
     },
     addError (state, error) {
-      
       	state.message = error.message;
-      
-      
       	state.errors = error.errors;
-      
     },
     
   },
   actions: {
     addReview (context, review) {
-      context.commit('clearMessage');
       context.commit('clearErrors');
 
       axios.post('/api/movies/reviews/store', review)
                 .then(res => {
                     context.commit('storeReview', res.data)
                 }).catch(err => {
-                	context.commit('addError', err)
+                	context.commit('addError', err.response.data)
                 });
     },
     getMovies(context) {
@@ -55,16 +48,13 @@ export default new Vuex.Store({
                 });
     },
     getReviews(context, movie) {
-      context.commit('clearMessage');
       context.commit('clearErrors');
 
-      console.log(movie);
-
-      axios.get('/api/movies/2/reviews')
+      axios.get('/api/movies/' + movie.movie_id +  '/reviews')
                 .then(res => {
                   context.commit('storeReviews', res.data)
                 }).catch(err => {
-                  context.commit('addError', err)
+                  context.commit('addError', err.response.data)
                 });
     }
   }
