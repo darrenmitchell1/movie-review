@@ -37,10 +37,10 @@ class MovieReviewController extends Controller
         $movie = Movie::with(['reviews'])->find($request->movie);
 
         if(empty($movie)) {
-            return response()->json(['message' => 'Movie Not Found'], 422);
+            return response()->json(['message' => 'Movie Not Found', 'errors' => ''], 422);
         }
 
-        return response()->json($movie, 200);
+        return response()->json($movie->reviews);
     }
 
     /**
@@ -57,7 +57,7 @@ class MovieReviewController extends Controller
 
         $this->movieReview->save();
 
-        return response()->json('Success', 200);
+        return response()->json($this->movieReview);
     }
 
 }

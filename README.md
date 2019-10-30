@@ -34,7 +34,7 @@ npm run dev
 
 ## Configuration
 
-[Installation Config](https://laravel.com/docs/6.x/installation#configuration)
+[Laravel 6 Installation Config](https://laravel.com/docs/6.x/installation#configuration)
 
 ### Application Key
 
@@ -46,17 +46,21 @@ php artisan key:generate
 
 ### Environment Config
 
-[Environment Config](https://laravel.com/docs/6.x/configuration#environment-configuration)
+[Laravel 6 Environment Config](https://laravel.com/docs/6.x/configuration#environment-configuration)
 
 Add the Application details to the .env and save:
 
 APP_NAME="Movie Review"
+
 APP_ENV=local
+
+NB. without trailing /
+
 APP_URL=http://localhost | http://www.movie-review.com
 
 ## Database Config
 
-[Database Config](https://laravel.com/docs/6.x/database#configuration)
+[Laravel 6 Database Config](https://laravel.com/docs/6.x/database#configuration)
 
 ### Create the database tables
 

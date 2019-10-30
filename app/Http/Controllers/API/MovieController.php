@@ -34,7 +34,7 @@ class MovieController extends Controller
     {
         $movies = Movie::all();
 
-        return response()->json($movies, 200);
+        return response()->json($movies);
     }
  
 }

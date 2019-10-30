@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-/*~ Root ~*/
-Route::get('/', 'API\MovieController@index')->name('root');
-
 /*~ Movie ~*/
 Route::get('/movies', 'API\MovieController@index')->name('movies');
 

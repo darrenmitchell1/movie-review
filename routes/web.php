@@ -14,3 +14,12 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('/', function () {
+    return view('movie_review');
+});
+
+/* For Page Refresh */
+Route::get('{path}', function () {
+    return view('movie_review');
+})->where( 'path', '([A-z\d-\/_.]+)?' );

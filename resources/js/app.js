@@ -19,7 +19,9 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('movies', require('./components/Movies.vue').default);
+Vue.component('movie-review-create', require('./components/MovieReviewCreate.vue').default);
+Vue.component('movie-reviews', require('./components/MovieReviews.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +29,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import store from './store/MovieReviewStore'
+import router from './routes'
+
 const app = new Vue({
+	store,
+	router,
     el: '#app',
 });
