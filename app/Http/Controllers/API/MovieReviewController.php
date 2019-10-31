@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\MovieReview;
+use App\Helpers\HTTPResponseHelper;
 
 class MovieReviewController extends Controller
 {
@@ -16,14 +17,21 @@ class MovieReviewController extends Controller
     protected $movieReview;
 
     /**
+     * @var HTTPResponseHelper
+     */
+    protected $httpResponseHelper;
+
+    /**
      * MovieReviewController constructor.
      *
      * @param MovieReview $movieReview
      */
     public function __construct(
-        MovieReview $movieReview)
+        MovieReview $movieReview,
+        HTTPResponseHelper $httpResponseHelper)
     {
         $this->movieReview = $movieReview;
+        $this->httpResponseHelper = $httpResponseHelper;
     }
     
     /**
@@ -37,7 +45,7 @@ class MovieReviewController extends Controller
         $movie = Movie::with(['reviews'])->find($request->movie);
 
         if(empty($movie)) {
-            return response()->json(['message' => 'Movie Not Found', 'errors' => ''], 422);
+            return response()->json($this->httpResponseHelper->formatMessageForJson('Movie Not Found'), 422);
         }
 
         return response()->json($movie->reviews);

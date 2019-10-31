@@ -1,6 +1,6 @@
-# Movie Review Tech Test
+# Movie Review
 
-Tech Test to build a Laravel / Vue app to record and display reviews for movies
+Laravel / Vue app to record and display reviews for movies.
 
 ## Prerequisite
 
