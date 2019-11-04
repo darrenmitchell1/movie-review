@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // Route Components
-import Movies from './components/Movies.vue'
-import MovieReviewCreate from './components/MovieReviewCreate.vue'
+import Movies from './components/MovieReview/Movies.vue'
+import MovieReviewCreate from './components/MovieReview/MovieReviewCreate.vue'
 
 Vue.use(VueRouter);
 

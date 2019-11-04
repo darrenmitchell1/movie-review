@@ -19,9 +19,12 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('movies', require('./components/Movies.vue').default);
-Vue.component('movie-review-create', require('./components/MovieReviewCreate.vue').default);
-Vue.component('movie-reviews', require('./components/MovieReviews.vue').default);
+Vue.component('form-message', require('./components/FormMessage.vue').default);
+Vue.component('form-input-error', require('./components/FormInputError.vue').default);
+
+Vue.component('movies', require('./components/MovieReview/Movies.vue').default);
+Vue.component('movie-review-create', require('./components/MovieReview/MovieReviewCreate.vue').default);
+Vue.component('movie-reviews', require('./components/MovieReview/MovieReviews.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

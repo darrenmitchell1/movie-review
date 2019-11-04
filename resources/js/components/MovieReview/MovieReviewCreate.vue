@@ -1,9 +1,9 @@
 <template>
     <div>
-        
         <p>
             <h4><router-link :to="{name: 'Movies'}">Show Movie List</router-link></h4>
         </p>
+        <form-message></form-message>
         <div class="row">
             <div class="col-md-5">
                 <h4 class="text-center font-weight-bold">Review Form</h4>
@@ -11,16 +11,12 @@
                 <form action="" @submit="addReview(review)">
                     <div class="form-group">
                         <input type="text" placeholder="Review Title" v-model="review.title" class="form-control">
-                        <div v-if="errors.title" class="alert alert-danger">
-                            <div v-for="err in errors.title.values()"> {{ err }} </div>
-                        </div>
+                        <form-input-error inputName="title"></form-input-error>
                     </div>
                     <div class="form-group">
                         <textarea v-model="review.review" placeholder="Review Text" class="form-control">
                         </textarea>
-                        <div v-if="errors.review" class="alert alert-danger">
-                            <div v-for="err in errors.review.values()"> {{ err }} </div>
-                        </div>
+                        <form-input-error inputName="review"></form-input-error>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-block btn-primary" @click.prevent="addReview(review)">Submit Review
@@ -49,14 +45,6 @@
         },
         props: {
             movieId: Number,
-        },
-        computed: {
-            message () {
-                return this.$store.state.message;
-            },
-            errors () {
-                return this.$store.state.errors;
-            },
         },
         methods: {
             addReview(review) {
