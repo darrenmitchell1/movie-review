@@ -58,6 +58,10 @@ NB. without trailing /
 
 APP_URL=http://localhost | http://www.movie-review.com
 
+if not using .env.example ensure the following are added:
+
+MIX_APP_URL="${APP_URL}"
+
 ## Database Config
 
 [Laravel 6 Database Config](https://laravel.com/docs/6.x/database#configuration)
