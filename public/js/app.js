@@ -1947,23 +1947,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "movie-review-create",
   data: function data() {
     return {
       review: {
-        movie_id: this.movieId,
+        movie_id: '',
         title: '',
         review: ''
-      }
+      },
+      movieReviewed: Object
     };
   },
   props: {
-    movieId: Number
+    movie: Object
   },
   methods: {
     addReview: function addReview(review) {
       this.$store.dispatch('addReview', review);
+    }
+  },
+  mounted: function mounted() {
+    // handle page refresh
+    if (this.movie) {
+      this.movieReviewed = this.movie;
+      this.review.movie_id = this.movieReviewed.id;
+      this.$store.dispatch('getMovie', {
+        'movie_id': this.movieReviewed.id
+      });
+    } else {
+      this.movieReviewed = this.$store.state.movie;
+      this.review.movie_id = this.movieReviewed.id;
     }
   }
 });
@@ -37482,6 +37498,12 @@ var render = function() {
       _c("form-message"),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("h4", { staticClass: "text-center font-weight-bold" }, [
+            _vm._v(_vm._s(_vm.movieReviewed.name))
+          ])
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "col-md-5" }, [
           _c("h4", { staticClass: "text-center font-weight-bold" }, [
             _vm._v("Review Form")
@@ -37493,6 +37515,7 @@ var render = function() {
               attrs: { action: "" },
               on: {
                 submit: function($event) {
+                  $event.preventDefault()
                   return _vm.addReview(_vm.review)
                 }
               }
@@ -37560,37 +37583,42 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-block btn-primary",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.addReview(_vm.review)
-                      }
-                    }
-                  },
-                  [_vm._v("Submit Review\n                    ")]
-                )
-              ])
+              _vm._m(0)
             ]
           )
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-7" },
-          [_c("movie-reviews", { attrs: { movieId: _vm.review.movie_id } })],
-          1
-        )
+        this.review.movie_id
+          ? _c(
+              "div",
+              { staticClass: "col-md-7" },
+              [
+                _c("movie-reviews", {
+                  attrs: { movieId: this.review.movie_id }
+                })
+              ],
+              1
+            )
+          : _vm._e()
       ])
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Submit Review")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -37694,7 +37722,7 @@ var render = function() {
                     attrs: {
                       to: {
                         name: "MovieReviewCreate",
-                        params: { movieId: movie.id }
+                        params: { movie: movie }
                       }
                     }
                   },
@@ -54313,6 +54341,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     movies: [],
+    movie: [],
     reviews: [],
     message: '',
     errors: ''
@@ -54321,6 +54350,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   mutations: {
     storeMovies: function storeMovies(state, movies) {
       state.movies = movies;
+    },
+    storeMovie: function storeMovie(state, movie) {
+      state.movie = movie;
     },
     storeReviews: function storeReviews(state, reviews) {
       state.reviews = reviews;
@@ -54351,10 +54383,19 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         context.commit('storeMovies', res.data);
       });
     },
+    getMovie: function getMovie(context, movie) {
+      context.commit('clearErrors');
+      axios.get('/api/movies/show/' + movie.movie_id).then(function (res) {
+        context.commit('storeMovie', res.data);
+      })["catch"](function (err) {
+        context.commit('addError', err.response.data);
+      });
+    },
     getReviews: function getReviews(context, movie) {
       context.commit('clearErrors');
       axios.get('/api/movies/' + movie.movie_id + '/reviews').then(function (res) {
         context.commit('storeReviews', res.data);
+        console.log(res.data);
       })["catch"](function (err) {
         context.commit('addError', err.response.data);
       });

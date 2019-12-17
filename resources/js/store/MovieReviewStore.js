@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-  	  movies: [],
+      movies: [],
+      movie: [],
       reviews: [],
       message: '',
       errors: '',
@@ -15,6 +16,9 @@ export default new Vuex.Store({
   mutations: {
     storeMovies (state, movies) {
       state.movies = movies;
+    },
+    storeMovie (state, movie) {
+      state.movie = movie;
     },
     storeReviews (state, reviews) {
       state.reviews = reviews;
@@ -49,12 +53,23 @@ export default new Vuex.Store({
                   context.commit('storeMovies', res.data)
                 });
     },
+    getMovie(context, movie) {
+      context.commit('clearErrors');
+
+      axios.get('/api/movies/show/' + movie.movie_id)
+                .then(res => {
+                  context.commit('storeMovie', res.data)
+                }).catch(err => {
+                  context.commit('addError', err.response.data)
+                });
+    },
     getReviews(context, movie) {
       context.commit('clearErrors');
 
       axios.get('/api/movies/' + movie.movie_id +  '/reviews')
                 .then(res => {
                   context.commit('storeReviews', res.data)
+                  console.log(res.data);
                 }).catch(err => {
                   context.commit('addError', err.response.data)
                 });

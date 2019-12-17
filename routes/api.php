@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 /*~ Movie ~*/
 Route::get('/movies', 'API\MovieController@index')->name('movies');
+Route::get('/movies/show/{movie}', 'API\MovieController@show')->name('movies.show');
 
 /*~ Review ~*/
 Route::get('/movies/{movie}/reviews', 'API\MovieReviewController@index')->name('movies.reviews.index');

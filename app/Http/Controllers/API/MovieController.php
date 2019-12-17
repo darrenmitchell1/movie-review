@@ -36,5 +36,15 @@ class MovieController extends Controller
 
         return response()->json($movies);
     }
+
+    /**
+     * Display the resource.
+     *
+     * @return \Illuminate\Http\Response JSON
+     */
+    public function show(Movie $movie)
+    {
+        return response()->json($movie);
+    }
  
 }

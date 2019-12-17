@@ -48,7 +48,7 @@ class MovieReviewController extends Controller
             return response()->json($this->httpResponseHelper->formatMessageForJson('Movie Not Found'), 422);
         }
 
-        return response()->json($movie->reviews);
+        return response()->json($movie->reviews->sortByDesc('id')->values());
     }
 
     /**

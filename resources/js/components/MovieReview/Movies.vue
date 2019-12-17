@@ -13,7 +13,7 @@
                 <tr v-for="movie in movies">
                     <td>{{movie.name}}</td>
                     <td>{{movie.description}}</td>
-                    <router-link :to="{name: 'MovieReviewCreate', params: {movieId: movie.id}}">Reviews</router-link>
+                    <router-link :to="{name: 'MovieReviewCreate', params: {movie: movie}}">Reviews</router-link>
                 </tr>
                 </tbody>
             </table>
